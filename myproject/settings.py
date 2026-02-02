@@ -28,9 +28,11 @@ SAPLING_API_KEY = os.getenv("SAPLING_API_KEY")
 SECRET_KEY = 'django-insecure--f0bl7_n9*s_&fsx$y*huumhb_1v&9wvx2e@-6rj_+h*$2qjeo'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv("DEBUG", "False") == "True"
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "qwerty-writing-assistant.onrender.com",
+]
 
 
 # Application definition
