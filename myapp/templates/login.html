@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<section class="section d-flex justify-content-center align-items-center">
+    <div class="auth-card">
+
+        <h2 class="section-title text-center mb-4">Login</h2>
+
+        <form method="post">
+            {% csrf_token %}
+
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-danger mb-3">
+                {{ message }}
+            </div>
+            {% endfor %}
+            {% endif %}
+
+            <input type="text" name="username" class="form-control auth-input mb-3" placeholder="Username" required
+                autocomplete="off">
+
+            <input type="password" name="password" class="form-control auth-input mb-3" placeholder="Password" required
+                autocomplete="new-password">
+
+            <button type="submit" class="primary-btn w-100 mb-3">
+                Login
+            </button>
+        </form>
+
+        <p class="text-center text-secondary mt-3">
+            Don't have an account?
+            <a href="{% url 'signup' %}" class="auth-link">Sign up</a>
+        </p>
+
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <section id="grammar" class="section d-flex align-items-center">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10 col-12">
+          <h2 class="section-title text-center mb-4">Grammar Correction Tool</h2>
+
+          <form method="post" action="{% url 'grammar_fix' %}">
+            {% csrf_token %}
+            <textarea class="form-control form-textarea mb-3" name="input_text" placeholder="Type your incorrect sentences here..">{{ input_text }}</textarea>
+
+            <div class="d-flex gap-3 mb-3 flex-wrap justify-content-center">
+              <button type="submit" class="primary-btn">Fix</button>
+              <button type="button" class="primary-btn" onclick="copyText()">Copy</button>
+              <button type="button" class="primary-btn" onclick="clearFields()">Clear</button>
+            </div>
+
+            <textarea class="form-control form-textarea" placeholder="Corrected version :)" readonly>{{ output_text }}</textarea>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

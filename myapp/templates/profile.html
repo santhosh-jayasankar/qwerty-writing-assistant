@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <section id="profile" class="section spa d-flex flex-column justify-content-center align-items-center">
+    <div class="profile-card w-100">
+      <div class="row g-4 w-100 justify-content-center">
+        <div class="col-12 col-lg-5 d-flex gap-3 p-0 align-items-center justify-content-center">
+          <i class="fa-solid fa-user profile-icon"></i>
+
+          <div>
+            <h5 class="profile-name">{{ request.user.username }}</h5>
+            <p class="profile-contact">{{ request.user.email }}</p>
+          </div>
+        </div>
+
+        <div class="col-12 col-lg-7 p-0 d-flex flex-column">
+          <h6 class="history-title">Your history</h6>
+
+          <div class="history-list">
+            {% for item in history %}
+              <div class="history-item">
+                <div class="history-tool">{{ item.tool }}</div>
+
+                <div class="history-input">{{ item.input }}</div>
+
+                <div class="history-output">{{ item.output }}</div>
+              </div>
+            {% empty %}
+              <div class="history-empty">No history yet</div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <form method="post" action="{% url 'logout' %}" class="mt-4">
+      {% csrf_token %}
+      <button type="submit" class="primary-btn logout-btn">Logout</button>
+    </form>
+  </section>
+{% endblock %}

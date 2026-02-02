@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<section id="translate" class="section d-flex align-items-center">
+    <div class="container">
+
+        <h2 class="section-title text-center mb-4">
+            Translation Tool
+        </h2>
+
+        <div class="row g-4 justify-content-center">
+
+            <form method="post" action="{% url 'translate_fix' %}">
+                {% csrf_token %}
+
+                <div class="row g-4 justify-content-center">
+
+                    <div class="col-md-6 col-12">
+                        <select class="form-select mb-3" name="src">
+                            <option value="en" {% if src == "en" %}selected{% endif %}>English</option>
+                            <option value="ta" {% if src == "ta" %}selected{% endif %}>Tamil</option>
+                            <option value="hi" {% if src == "hi" %}selected{% endif %}>Hindi</option>
+                        </select>
+
+                        <textarea class="form-control form-textarea" name="input_text"
+                            placeholder="Type text to translate..">{{ input_text|default_if_none:"" }}</textarea>
+                    </div>
+
+                    <div class="col-md-6 col-12">
+                        <select class="form-select mb-3" name="dest">
+                            <option value="ta" {% if dest == "ta" %}selected{% endif %}>Tamil</option>
+                            <option value="en" {% if dest == "en" %}selected{% endif %}>English</option>
+                            <option value="hi" {% if dest == "hi" %}selected{% endif %}>Hindi</option>
+                        </select>
+
+                        <textarea class="form-control form-textarea" readonly
+                            placeholder="Translated text :)">{{ output_text|default_if_none:"" }}</textarea>
+                    </div>
+
+                </div>
+
+                <div class="d-flex gap-3 mt-4 flex-wrap justify-content-center">
+                    <button type="submit" class="primary-btn">Translate</button>
+                    <button type="button" type="button" class="primary-btn" onclick="copyText()">Copy</button>
+                    <button type="button" type="button" class="primary-btn" onclick="clearFields()">Clear</button>
+                </div>
+            </form>
+
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

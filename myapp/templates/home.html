@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <section id="home" class="section spa d-flex flex-column align-items-center">
+    <div id="hero" class="container-fluid d-flex align-items-center">
+      <div class="container">
+        <div class="row align-items-center gap-5 justify-content-between">
+          <div class="col-lg-6 text-center text-lg-start hero-texts">
+            <h1 class="fw-bold display-5 text-light">
+              Write Smarter.
+              <br class="d-none d-lg-block" />
+              Present Yourself Better.
+            </h1>
+
+            <p class="text-secondary my-3">Tools for grammar correction, translation, and smart rephrasing - simple, fast, and effective.</p>
+
+            <a class="btn btn-lg rounded-pill hero-btn" href="#tools">Get Started</a>
+          </div>
+
+          <div class="col-lg-5 text-center mt-4 mt-lg-0">
+            <img src="{% static 'images/AI-Writing-Tools-Illustration.png' %}" class="img-fluid hero-img" alt="AI Writing Tools Illustration" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="tools" class="container-fluid d-flex justify-content-center align-items-center mb-5">
+      <div class="container text-center">
+        <h3 class="p-5 section-title">Our Tools</h3>
+        <div class="container-fluid">
+          <div class="row justify-content-center g-5">
+            <div class="col-12 col-md-4 col-lg-4 d-flex justify-content-center">
+              <div class="tool-card">
+                <i class="fa-solid fa-pencil tool-icon"></i>
+                <div class="tool-title">GRAMMER CORRECTION</div>
+                <div class="tool-desc">Click OPEN to Fix Grammer.</div>
+                <a class="tool-btn" href="{% url 'grammertool' %}">OPEN</a>
+              </div>
+            </div>
+
+            <div class="col-12 col-md-4 col-lg-4 d-flex justify-content-center">
+              <div class="tool-card">
+                <i class="fa-solid fa-language tool-icon"></i>
+                <div class="tool-title">TRANSLATION</div>
+                <div class="tool-desc">Click OPEN to Translate.</div>
+                <a class="tool-btn" href="{% url 'translationtool' %}">OPEN</a>
+              </div>
+            </div>
+
+            <div class="col-12 col-md-4 col-lg-4 d-flex justify-content-center">
+              <div class="tool-card">
+                <i class="fa-solid fa-gears tool-icon"></i>
+                <div class="tool-title">AI REPHRASER</div>
+                <div class="tool-desc">Click OPEN to Rephrase the sentence.</div>
+                <a class="tool-btn" href="{% url 'rephrasetool' %}">OPEN</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}
