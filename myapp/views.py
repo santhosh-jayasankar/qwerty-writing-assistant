@@ -8,8 +8,7 @@ import requests
 from googletrans import Translator
 from django.conf import settings
 from .models import ToolHistory
-
-SAPLING_API_KEY = os.getenv("SAPLING_API_KEY")
+import language_tool_python
 
 # Create your views here.
 
@@ -80,33 +79,20 @@ def logout_view(request):
     logout(request)
     return redirect('home')
 
+tool = language_tool_python.LanguageTool('en-US')
+
 def grammar_fix(request):
     input_text = request.POST.get("input_text", "").strip()
     corrected_text = input_text
 
     if input_text:
-        response = requests.post(
-            "https://api.sapling.ai/api/v1/edits",
-            json={
-                "key": SAPLING_API_KEY,
-                "text": input_text,
-                "session_id": "grammar"
-            },
-            timeout=30
-        )
-
-        data = response.json()
-
-        edits = data.get("edits", [])
-        for edit in reversed(edits):
-            start = edit["start"]
-            end = edit["end"]
-            replacement = edit["replacement"]
-            corrected_text = (
-                corrected_text[:start]
-                + replacement
-                + corrected_text[end:]
+        try:
+            matches = tool.check(input_text)
+            corrected_text = language_tool_python.utils.correct(
+                input_text, matches
             )
+        except Exception as e:
+            print("LanguageTool error:", e)
 
     if request.method == "POST" and input_text and request.user.is_authenticated:
         ToolHistory.objects.create(
