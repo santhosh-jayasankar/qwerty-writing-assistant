@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from myapp import views
+from myapp.views import create_admin_once
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -32,4 +33,5 @@ urlpatterns = [
     path("grammar/fix/", views.grammar_fix, name="grammar_fix"),
     path("translate/fix/", views.translate_fix, name="translate_fix"),
     path('rephraser/', views.rephraser, name='rephraser'),
+    path("create-admin/", create_admin_once),
 ]

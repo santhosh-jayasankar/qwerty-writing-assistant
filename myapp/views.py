@@ -197,3 +197,14 @@ def rephraser(request):
         "input_text": input_text,
         "output_text": output_text
     })
+
+def create_admin_once(request):
+    if User.objects.filter(username="admin").exists():
+        return HttpResponse("Admin already exists")
+
+    User.objects.create_superuser(
+        username="heisenberg",
+        email="walterwhite@gmail.com",
+        password="iamthecook"
+    )
+    return HttpResponse("Admin created successfully")
