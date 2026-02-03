@@ -80,14 +80,15 @@ def logout_view(request):
     logout(request)
     return redirect('home')
 
-tool = language_tool_python.LanguageTool('en-US',remote_server='https://api.languagetool.org')
-
 def grammar_fix(request):
     input_text = request.POST.get("input_text", "").strip()
     corrected_text = input_text
 
     if input_text:
         try:
+            
+            tool = language_tool_python.LanguageTool('en-US',remote_server='https://api.languagetool.org')
+
             matches = tool.check(input_text)
             corrected_text = language_tool_python.utils.correct(
                 input_text, matches
@@ -109,9 +110,10 @@ def grammar_fix(request):
         "output_text": corrected_text
     })
 
-translator = Translator()
-
 def translate_fix(request):
+    
+    translator = Translator()
+
     input_text = request.POST.get("input_text", "").strip()
     output_text = ""
 
