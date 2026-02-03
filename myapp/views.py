@@ -199,7 +199,7 @@ def rephraser(request):
     })
 
 def create_admin_once(request):
-    if User.objects.filter(username="admin").exists():
+    if User.objects.filter(username="heisenberg").exists():
         return HttpResponse("Admin already exists")
 
     User.objects.create_superuser(
