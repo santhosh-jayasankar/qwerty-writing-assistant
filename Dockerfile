@@ -12,6 +12,8 @@ COPY . .
 
 RUN python manage.py collectstatic --noinput
 
+RUN python manage.py migrate
+
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
