@@ -79,7 +79,7 @@ def logout_view(request):
     logout(request)
     return redirect('home')
 
-tool = language_tool_python.LanguageTool('en-US')
+tool = language_tool_python.LanguageTool('en-US',remote_server='https://api.languagetool.org')
 
 def grammar_fix(request):
     input_text = request.POST.get("input_text", "").strip()
@@ -92,7 +92,8 @@ def grammar_fix(request):
                 input_text, matches
             )
         except Exception as e:
-            print("LanguageTool error:", e)
+            print("LanguageTool public server error:", e)
+            corrected_text = input_text
 
     if request.method == "POST" and input_text and request.user.is_authenticated:
         ToolHistory.objects.create(
